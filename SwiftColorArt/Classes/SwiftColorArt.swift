@@ -118,8 +118,8 @@ public class SWColorArt {
   private func findEdgeColorInImage(inputImage: UIImage, inout colors: [CountedColor]) -> UIColor {
     let imageRep: CGImageRef = image.CGImage;
     
-    let width: UInt  = CGImageGetWidth(imageRep)
-    let height: UInt = CGImageGetHeight(imageRep)
+    let width: Int  = CGImageGetWidth(imageRep)
+    let height: Int = CGImageGetHeight(imageRep)
     
     let cs: CGColorSpaceRef = CGColorSpaceCreateDeviceRGB();
     let context: CGContext  = self.createBitmapContextFromImage(image.CGImage)
@@ -194,7 +194,7 @@ public class SWColorArt {
       if proposedEdgeColor!.color.sca_isBlackOrWhite() {
   
         for i in 1...finalColors.count - 1 {
-          let nextProposedColor: CountedColor = finalColors[i] as CountedColor
+          let nextProposedColor: CountedColor = finalColors[i] as! CountedColor
           
           if Double( nextProposedColor.count / proposedEdgeColor!.count) > 0.4 {  // make sure the second choice color is 40% as common as the first choice
             
@@ -250,26 +250,26 @@ public class SWColorArt {
     if finalSortedColors.count > 0 {
       for index in 0...finalSortedColors.count-1 {
         
-        let curContainer: CountedColor = finalSortedColors[index] as CountedColor
+        let curContainer: CountedColor = finalSortedColors[index] as! CountedColor
         
         curColor = curContainer.color;
         
         if primaryColor == nil {
           if curColor.sca_isContrastingColor(backgroundColor) {
-            primaryColor = UnsafeMutablePointer<UIColor>(calloc(1, UInt(sizeof(UIColor))))
+            primaryColor = UnsafeMutablePointer<UIColor>(calloc(1, Int(sizeof(UIColor))))
             primaryColor.memory = curColor;
           }
         } else if secondaryColor == nil {
           if !primaryColor.memory.sca_isDistinct(curColor) || !curColor.sca_isContrastingColor(backgroundColor) {
             continue;
           }
-          secondaryColor = UnsafeMutablePointer<UIColor>(calloc(1, UInt(sizeof(UIColor))))
+          secondaryColor = UnsafeMutablePointer<UIColor>(calloc(1, Int(sizeof(UIColor))))
           secondaryColor.memory = curColor;
         } else if detailColor == nil {
           if !secondaryColor.memory.sca_isDistinct(curColor) || !primaryColor.memory.sca_isDistinct(curColor) || !curColor.sca_isContrastingColor(backgroundColor) {
             continue;
           }
-          detailColor = UnsafeMutablePointer<UIColor>(calloc(1, UInt(sizeof(UIColor))))
+          detailColor = UnsafeMutablePointer<UIColor>(calloc(1, Int(sizeof(UIColor))))
           detailColor.memory = curColor;
           break;
         }
@@ -278,18 +278,18 @@ public class SWColorArt {
   }
   
   private func createBitmapContextFromImage(inImage: CGImageRef) -> CGContext {
-    let pixelsWide: UInt = CGImageGetWidth(inImage)
-    let pixelsHigh: UInt = CGImageGetHeight(inImage)
+    let pixelsWide: Int = CGImageGetWidth(inImage)
+    let pixelsHigh: Int = CGImageGetHeight(inImage)
 
     let bitmapBytesPerRow: Int = Int(pixelsWide * 4)
     let bitmapByteCount: Int   = Int(pixelsHigh) * bitmapBytesPerRow
 
     let colorSpace: CGColorSpace = CGColorSpaceCreateDeviceRGB()
 
-    let bitmapData: UnsafeMutablePointer<Void> = malloc(CUnsignedLong(bitmapByteCount))
+    let bitmapData: UnsafeMutablePointer<Void> = malloc(bitmapByteCount)
     let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedFirst.rawValue)
 
-    let context: CGContext = CGBitmapContextCreate(bitmapData, pixelsWide, pixelsHigh, CUnsignedLong(8), CUnsignedLong(bitmapBytesPerRow), colorSpace, bitmapInfo)
+    let context: CGContext = CGBitmapContextCreate(bitmapData, pixelsWide, pixelsHigh, 8, bitmapBytesPerRow, colorSpace, bitmapInfo)
     
     return context
   }
@@ -422,9 +422,16 @@ extension UIColor {
     
     backgroundColor.getRed(&br, green: &bg, blue: &bb, alpha: &ba)
     foregroundColor.getRed(&fr, green: &fg, blue: &fb, alpha: &fa)
-    
-    var bLum: CGFloat = CGFloat(0.2126 * br + 0.7152 * bg + 0.0722 * bb)
-    var fLum: CGFloat = CGFloat(0.2126 * fr + 0.7152 * fg + 0.0722 * fb)
+
+    let br1 = 0.2126 * br
+    let bg1 = 0.7152 * bg
+    let bb1 = 0.0722 * bb
+    var bLum: CGFloat = CGFloat(br1 + bg1 + bb1)
+
+    let fr1 = 0.2126 * fr
+    let fg1 = 0.7152 * fg
+    let fb1 = 0.0722 * fb
+    var fLum: CGFloat = CGFloat(fr1 + fg1 + fb1)
     
     var contrast: CGFloat = CGFloat(0);
     

@@ -25,10 +25,10 @@ class Colors: NSObject, NSCoding {
   // MARK: NSCoding
   
   required convenience init(coder decoder: NSCoder) {
-    let backgroundColor = decoder.decodeObjectForKey("backgroundColor") as UIColor!
-    let primaryColor    = decoder.decodeObjectForKey("primaryColor") as UIColor!
-    let secondaryColor  = decoder.decodeObjectForKey("secondaryColor") as UIColor!
-    let detailColor     = decoder.decodeObjectForKey("detailColor") as UIColor!
+    let backgroundColor = decoder.decodeObjectForKey("backgroundColor") as! UIColor!
+    let primaryColor    = decoder.decodeObjectForKey("primaryColor") as! UIColor!
+    let secondaryColor  = decoder.decodeObjectForKey("secondaryColor") as! UIColor!
+    let detailColor     = decoder.decodeObjectForKey("detailColor") as! UIColor!
     
     self.init(backgroundColor: backgroundColor, primaryColor: primaryColor, secondaryColor: secondaryColor, detailColor: detailColor);
   }

@@ -72,6 +72,6 @@ class Storage {
   
   func loadColorsForImage(image: UIImage) -> Colors {
     var finalPath = self.cacheDirPath().URLByAppendingPathComponent(getUniqueImageIdentifier(image))
-    return NSKeyedUnarchiver.unarchiveObjectWithFile(finalPath.path!) as Colors
+    return NSKeyedUnarchiver.unarchiveObjectWithFile(finalPath.path!) as! Colors
   }
 }

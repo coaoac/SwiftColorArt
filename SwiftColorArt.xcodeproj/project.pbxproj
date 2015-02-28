@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63CC2A7B1AA2559700ADE13E /* CryptoSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63CC2A7A1AA2559700ADE13E /* CryptoSwift.framework */; };
 		FE23BE861A6A749200DFE6FC /* SwiftColorArtFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE23BE7B1A6A749200DFE6FC /* SwiftColorArtFramework.framework */; };
 		FE23BE921A6A749200DFE6FC /* SwiftColorArtFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE23BE7B1A6A749200DFE6FC /* SwiftColorArtFramework.framework */; };
 		FE23BE931A6A749200DFE6FC /* SwiftColorArtFramework.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE23BE7B1A6A749200DFE6FC /* SwiftColorArtFramework.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -90,6 +91,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		63CC2A7A1AA2559700ADE13E /* CryptoSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CryptoSwift.framework; path = "../CryptoSwift/build/Debug-iphoneos/CryptoSwift.framework"; sourceTree = "<group>"; };
 		FE23BE7B1A6A749200DFE6FC /* SwiftColorArtFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftColorArtFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE23BE7E1A6A749200DFE6FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FE23BE7F1A6A749200DFE6FC /* SwiftColorArtFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftColorArtFramework.h; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63CC2A7B1AA2559700ADE13E /* CryptoSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +213,7 @@
 		FE9BF7081A5C75F800065165 = {
 			isa = PBXGroup;
 			children = (
+				63CC2A7A1AA2559700ADE13E /* CryptoSwift.framework */,
 				FE9BF7131A5C75F800065165 /* SwiftColorArt */,
 				FE9BF72B1A5C75F800065165 /* SwiftColorArtTests */,
 				FE23BE7C1A6A749200DFE6FC /* SwiftColorArtFramework */,
@@ -581,6 +585,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/aminec/Develop/Projects/AReader/CryptoSwift/build/Debug-iphoneos",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -604,6 +612,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/aminec/Develop/Projects/AReader/CryptoSwift/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = SwiftColorArtFramework/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
